@@ -102,6 +102,7 @@ If it works in theory but not in deployment — it's incomplete.
 
 📧 eshaan.adyanthaya@gmail.com  
 🔗 LinkedIn: https://www.linkedin.com/in/eshaan-adyanthaya-87a88a288/ 
+
 💻 GitHub: github.com/Eshaan0110  
 
 ---
