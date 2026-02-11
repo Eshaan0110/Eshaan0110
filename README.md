@@ -1,4 +1,4 @@
-# Eshaan Adyanthaya 👋  
+# Eshaan Adyanthaya  
 ### Engineer. Researcher. Systems Thinker.
 
 Integrated M.Tech Software Engineering @ VIT Chennai  
@@ -8,9 +8,9 @@ I build intelligent systems that bridge theory, research, and real-world deploym
 
 ---
 
-## 🚀 What I Work On
+##  What I Work On
 
-### 🧠 Neuromorphic & Geometric AI
+###  Neuromorphic & Geometric AI
 - Co-author of **SGSPose** (IEEE Access, 2025)
 - Designed a neuromorphic-geometric 6D pose estimation pipeline
 - Integrated:
@@ -23,7 +23,7 @@ I enjoy building models that respect geometry — not just optimize loss.
 
 ---
 
-### 🤖 Robotics & Intelligent Systems
+### Robotics & Intelligent Systems
 
 #### 🔹 Autonomous Underwater Vehicle – Project MIRA 2.0
 - Built underwater vision enhancement pipeline (CLAHE, Sobel, LAB processing)
@@ -41,7 +41,7 @@ I don’t just simulate robots — I deploy them.
 
 ---
 
-## 🏆 Leadership
+##  Leadership
 
 ### Team Manager — Dreadnought Robotics
 - Lead Programming, Electrical, Mechanical & Management divisions
@@ -57,7 +57,7 @@ I enjoy building teams as much as I enjoy building systems.
 
 ---
 
-## 📚 Research Publications
+##  Research Publications
 
 - **SGSPose** — IEEE Access (2025)  
   Neuromorphic-Geometric Fusion for 6D Pose Estimation  
@@ -68,7 +68,7 @@ I enjoy building teams as much as I enjoy building systems.
 
 ---
 
-## 🛠 Technical Stack
+##  Technical Stack
 
 ### Languages
 Python • C • C++ • Java • SQL • Bash • MATLAB • Arduino
@@ -84,7 +84,7 @@ Git • Linux • Jupyter • Google Colab • VS Code • PyCharm • MySQL
 
 ---
 
-## 🎯 Engineering Philosophy
+## Engineering Philosophy
 
 I care about:
 
@@ -98,7 +98,7 @@ If it works in theory but not in deployment — it's incomplete.
 
 ---
 
-## 📫 Connect
+## Connect
 
 📧 eshaan.adyanthaya@gmail.com  
 🔗 LinkedIn: https://www.linkedin.com/in/eshaan-adyanthaya-87a88a288/ 
