@@ -1,111 +1,88 @@
 # Eshaan Adyanthaya  
-### Engineer. Researcher. Systems Thinker.
+### AI • Robotics • 
 
 Integrated M.Tech Software Engineering @ VIT Chennai  
-AI & Robotics Intern | IEEE Published Researcher | Team Lead  
+IEEE Published Researcher | Team Manager — Dreadnought Robotics  
 
-I build intelligent systems that bridge theory, research, and real-world deployment.
-
----
-
-##  What I Work On
-
-###  Neuromorphic & Geometric AI
-- Co-author of **SGSPose** (IEEE Access, 2025)
-- Designed a neuromorphic-geometric 6D pose estimation pipeline
-- Integrated:
-  - Spiking Neural Networks (event-driven LIF neurons)
-  - Graph Neural Networks
-  - SE(3)-Equivariant optimization
-- Reduced translation error on 7-Scenes benchmark by **70%+**
-
-I enjoy building models that respect geometry — not just optimize loss.
+I build intelligent systems that bridge mathematical foundations with real-world deployment.
 
 ---
 
-### Robotics & Intelligent Systems
+## 🔬 Research
 
-#### 🔹 Autonomous Underwater Vehicle – Project MIRA 2.0
-- Built underwater vision enhancement pipeline (CLAHE, Sobel, LAB processing)
-- Developed YOLO & MobileNet-SSD detection models
-- Integrated ROS1 with Jetson Xavier + Raspberry Pi
-- Real-time marker & obstacle detection in turbid conditions
+### SGSPose — IEEE Access (2025)  
+Neuromorphic-Geometric Fusion for 6D Pose Estimation  
+• Spiking Neural Networks + Graph Neural Networks  
+• SE(3)-Equivariant optimization  
+• 70%+ translation error reduction on 7-Scenes  
 
-#### 🔹 Gesture-Controlled Robotic Arm (3DOF & 4DOF)
-- Built real-time hand tracking using MediaPipe + OpenCV
-- Designed joint-mapping logic translating finger kinematics → robotic actuation
-- Implemented URDF simulation in RViz before hardware deployment
-- Integrated servo control + inverse kinematics
-
-I don’t just simulate robots — I deploy them.
+### GOA-UNet — Measurement Journal, Elsevier (2025)  
+Metaheuristic optimization for medical image segmentation  
 
 ---
 
-##  Leadership
+## 🤖 Robotics & Systems
 
-### Team Manager — Dreadnought Robotics
-- Lead Programming, Electrical, Mechanical & Management divisions
-- Represent team at national & international competitions
-- Coordinate autonomy pipelines for AUV systems
+### Autonomous Underwater Vehicle — MIRA 2.0
+• Underwater vision enhancement pipeline  
+• YOLO & MobileNet-SSD deployment  
+• ROS1 integration (Jetson Xavier + Raspberry Pi)  
+• Real-time obstacle & marker detection  
 
-### President — Microsoft Innovations Club
-- Lead executive board
-- Organized workshops & hackathons
-- Expanded technical programs and partnerships
-
-I enjoy building teams as much as I enjoy building systems.
-
----
-
-##  Research Publications
-
-- **SGSPose** — IEEE Access (2025)  
-  Neuromorphic-Geometric Fusion for 6D Pose Estimation  
-
-- **GOA-UNet** — Measurement Journal, Elsevier (2025)  
-  Metaheuristic optimization for medical image segmentation  
-  Achieved 98.5% crack detection accuracy  
+### Gesture-Controlled Robotic Arm
+• MediaPipe-based hand tracking  
+• Kinematic mapping → real robotic actuation  
+• URDF simulation in RViz before hardware deployment  
 
 ---
 
-##  Technical Stack
+## 🛠 Tech Stack
 
-### Languages
-Python • C • C++ • Java • SQL • Bash • MATLAB • Arduino
-
-### AI / Vision
-PyTorch • OpenCV • MediaPipe • YOLO • Roboflow
-
-### Robotics
-ROS1 • RViz • NVIDIA Jetson Xavier • Raspberry Pi • Servo Control Systems
-
-### Tools
-Git • Linux • Jupyter • Google Colab • VS Code • PyCharm • MySQL
+### 💻 Languages
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
+![C++](https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![MATLAB](https://img.shields.io/badge/MATLAB-FF6F00?style=for-the-badge&logo=Mathworks&logoColor=white)
 
 ---
 
-## Engineering Philosophy
-
-I care about:
-
-- Mathematical foundations
-- System architecture
-- Real-time performance
-- Hardware-software integration
-- Research-backed implementation
-
-If it works in theory but not in deployment — it's incomplete.
+### 🤖 AI / Vision
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
+![MediaPipe](https://img.shields.io/badge/YOLO-111F68?style=for-the-badge)
+![YOLO](https://img.shields.io/badge/MediaPipe-0F9D58?style=for-the-badge)
 
 ---
 
-## Connect
+### 🦾 Robotics
+![ROS1](https://img.shields.io/badge/ROS1-22314E?style=for-the-badge&logo=ros&logoColor=white)
+![RViz](https://img.shields.io/badge/RViz-22314E?style=for-the-badge)
+![Jetson Xavier](https://img.shields.io/badge/NVIDIA_Jetson-76B900?style=for-the-badge&logo=nvidia&logoColor=white)
+![Raspberry Pi](https://img.shields.io/badge/Raspberry_Pi-C51A4A?style=for-the-badge&logo=raspberry-pi&logoColor=white)
+
+---
+
+### ⚙️ Tools
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![VS Code](https://img.shields.io/badge/VS_Code-0078D4?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white)
+
+---
+
+## 🧠 Engineering Philosophy
+
+• Respect geometry  
+• Build for deployment  
+• Optimize for real-time  
+• Integrate hardware + software  
+• If it works in theory but not in deployment — it’s incomplete  
+
+---
+
+## 📫 Connect
 
 📧 eshaan.adyanthaya@gmail.com  
-🔗 LinkedIn: https://www.linkedin.com/in/eshaan-adyanthaya-87a88a288/ 
-
-💻 GitHub: github.com/Eshaan0110  
-
----
-
-> Building intelligent systems that operate in the real world —  
-> not just inside notebooks.
+🔗 LinkedIn: https://www.linkedin.com/in/eshaan-adyanthaya-87a88a288/  
+💻 GitHub: https://github.com/Eshaan0110
