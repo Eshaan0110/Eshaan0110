@@ -57,11 +57,11 @@ Real-time AI deployment on embedded hardware
 <br>
 
 <h2 align="center">GitHub Activity</h2>
+## 📈 Contribution Activity
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Eshaan0110&show_icons=true&theme=transparent&hide_border=true&title_color=9CA3AF&text_color=9CA3AF&icon_color=9CA3AF" height="160"/>
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Eshaan0110&bg_color=0D1117&color=9CA3AF&line=3B82F6&point=FFFFFF&hide_border=true&area=true" />
 </p>
-
 
 <br>
 
