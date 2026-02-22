@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/lab.png" width="100%" alt="Pixel Lab Scene"/>
+  <img src="assets/lab1.png" width="100%" alt="Pixel Lab Scene"/>
 </p>
 
 <h1 align="center">Eshaan Adyanthaya</h1>
