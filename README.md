@@ -1,16 +1,16 @@
+<p align="center">
+  <img src="assets/lab.png" width="100%" alt="Pixel Lab Scene"/>
+</p>
+
 <h1 align="center">Eshaan Adyanthaya</h1>
 
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?size=22&duration=3000&color=FFFFFF&center=true&vCenter=true&width=600&lines=AI+%26+Robotics+Engineer;Building+AI+Systems+for+Real-World+Deployment;Geometry+%E2%86%92+Optimization+%E2%86%92+Control" />
+AI & Robotics Engineer <br>
+Integrated M.Tech @ VIT Chennai
 </p>
 
 <p align="center">
-Integrated M.Tech @ VIT Chennai <br>
-Team Manager — Dreadnought Robotics
-</p>
-
-<p align="center">
-I build intelligent systems that move from mathematical foundations to real-world deployment.
+Designing intelligent systems that move from geometry to real-world deployment.
 </p>
 
 <br>
