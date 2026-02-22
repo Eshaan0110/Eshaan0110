@@ -59,9 +59,9 @@ Real-time AI deployment on embedded hardware
 <h2 align="center">GitHub Activity</h2>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Eshaan0110&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117" height="150"/>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Eshaan0110&theme=tokyonight&hide_border=true&background=0D1117" height="150"/>
+  <img src="https://github-readme-stats.vercel.app/api?username=Eshaan0110&show_icons=true&theme=transparent&hide_border=true&title_color=9CA3AF&text_color=9CA3AF&icon_color=9CA3AF" height="160"/>
 </p>
+
 
 <br>
 
@@ -75,7 +75,7 @@ Real-time AI deployment on embedded hardware
 <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
 </a>
 <a href="https://github.com/Eshaan0110">
-<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
+
 </a>
 </p>
 
