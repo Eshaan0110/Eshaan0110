@@ -1,32 +1,23 @@
 <p align="center">
   <img src="assets/lab1.png" width="100%" alt="Pixel Lab Scene"/>
 </p>
-
 <h1 align="center">Eshaan Adyanthaya</h1>
-
 <p align="center">
 AI & Robotics Engineer <br>
 Integrated M.Tech @ VIT Chennai
 </p>
-
 <p align="center">
 Designing intelligent systems that move from geometry to real-world deployment.
 </p>
-
 <br>
-
 <h2 align="center">Currently Building</h2>
-
 <p align="center">
 Autonomous underwater perception systems <br>
 Gesture-controlled robotic manipulation <br>
 Real-time AI deployment on embedded hardware
 </p>
-
 <br>
-
 <h2 align="center">Systems I Work With</h2>
-
 <p align="center">
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
 <img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white"/>
@@ -53,19 +44,21 @@ Real-time AI deployment on embedded hardware
 <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"/>
 <img src="https://img.shields.io/badge/Raspberry_Pi-C51A4A?style=for-the-badge&logo=raspberry-pi&logoColor=white"/>
 </p>
-
 <br>
-
 <h2 align="center">GitHub Activity</h2>
-
 <p align="center">
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=Eshaan0110&bg_color=0D1117&color=9CA3AF&line=3B82F6&point=FFFFFF&hide_border=true&area=true" />
 </p>
-
 <br>
-
+<h2 align="center">Contribution Sonar</h2>
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/Eshaan0110/Eshaan0110@output/dist/sonar.svg" width="420"/>
+</p>
+<p align="center">
+  <sub>Each ping is a day I wrote code — brighter blips mean more commits. Updates daily.</sub>
+</p>
+<br>
 <h2 align="center">Connect</h2>
-
 <p align="center">
 <a href="mailto:eshaan.adyanthaya@gmail.com">
 <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
@@ -74,12 +67,9 @@ Real-time AI deployment on embedded hardware
 <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
 </a>
 <a href="https://github.com/Eshaan0110">
-
 </a>
 </p>
-
 <br>
-
 <p align="center">
 <em>a generic coding quote</em>
 </p>
