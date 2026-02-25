@@ -195,10 +195,10 @@ for (x, y, size, color, glow, sweep_deg, count, date) in pings:
 svg += f'''
 <!-- Sweep arm -->
 <g clip-path="url(#radarClip)">
-  <g transform-origin="{CX} {CY}">
+  <g>
     <animateTransform attributeName="transform" type="rotate"
       from="0 {CX} {CY}" to="360 {CX} {CY}"
-      dur="{SWEEP_DURATION}s" repeatCount="indefinite"/>
+      dur="{SWEEP_DURATION}s" repeatCount="indefinite" additive="replace"/>
     <!-- Trailing glow wedge -->
     <path d="M{CX},{CY} L{CX},{CY - R} A{R},{R} 0 0,1 {CX + R*math.sin(math.radians(25)):.1f},{CY - R*math.cos(math.radians(25)):.1f} Z"
       fill="url(#sweepGrad)" opacity="0.7"/>
