@@ -50,12 +50,12 @@ Real-time AI deployment on embedded hardware
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=Eshaan0110&bg_color=0D1117&color=9CA3AF&line=3B82F6&point=FFFFFF&hide_border=true&area=true" />
 </p>
 <br>
-<h2 align="center">Contribution Sonar</h2>
+<h2 align="center">Contribution City</h2>
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/Eshaan0110/Eshaan0110@output/dist/sonar.svg" width="420"/>
+  <img src="https://cdn.jsdelivr.net/gh/Eshaan0110/Eshaan0110@output/dist/city.svg" width="100%"/>
 </p>
 <p align="center">
-  <sub>Each ping is a day I wrote code — brighter blips mean more commits. Updates daily.</sub>
+  <sub>Each building is a month — taller skyline means more commits. Updates daily.</sub>
 </p>
 <br>
 <h2 align="center">Connect</h2>

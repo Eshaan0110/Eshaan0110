@@ -1,4 +1,4 @@
-name: Generate Sonar Radar
+name: Generate Pixel City
 
 on:
   schedule:
@@ -22,35 +22,29 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Create folders
-        run: mkdir -p dist scripts
-
-      - name: Copy sonar script
-        run: cp scripts/sonar.py sonar.py
-
-      - name: Run sonar script
+      - name: Run city script
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python sonar.py
+        run: python scripts/city.py
 
       - name: Commit and push to output branch
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
 
-          cp dist/sonar.svg /tmp/sonar.svg
+          cp dist/city.svg /tmp/city.svg
 
           git fetch origin
           git checkout -B output origin/output 2>/dev/null || git checkout -B output
 
           mkdir -p dist
-          cp /tmp/sonar.svg dist/sonar.svg
+          cp /tmp/city.svg dist/city.svg
 
-          git add dist/sonar.svg
-          git commit -m "Update sonar radar [skip ci]" || echo "No changes to commit"
+          git add dist/city.svg
+          git commit -m "Update pixel city [skip ci]" || echo "No changes to commit"
           git push origin output --force
 
       - name: Purge jsdelivr cache
         run: |
-          curl -s "https://purge.jsdelivr.net/gh/Eshaan0110/Eshaan0110@output/dist/sonar.svg"
+          curl -s "https://purge.jsdelivr.net/gh/Eshaan0110/Eshaan0110@output/dist/city.svg"
           echo "Cache purged"
