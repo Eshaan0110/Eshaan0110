@@ -55,7 +55,7 @@ Real-time AI deployment on embedded hardware
   <img src="https://cdn.jsdelivr.net/gh/Eshaan0110/Eshaan0110@output/dist/city.svg" width="100%"/>
 </p>
 <p align="center">
-  <sub>Each building is a month — taller skyline means more commits. Updates daily.</sub>
+  <sub>Each building is a month · windows show daily commits · yellow = active · updates daily</sub>
 </p>
 <br>
 <h2 align="center">Connect</h2>

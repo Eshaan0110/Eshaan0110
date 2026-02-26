@@ -2,7 +2,8 @@ import requests
 import os
 import math
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
+from collections import defaultdict
 
 USERNAME = "Eshaan0110"
 TOKEN = os.environ["GITHUB_TOKEN"]
@@ -35,28 +36,13 @@ data = response.json()
 weeks = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
 total = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]["totalContributions"]
 
-# Collect all days
 days = []
 for week in weeks:
     for day in week["contributionDays"]:
         days.append(day)
 
-# Group by month
-from collections import defaultdict
-monthly = defaultdict(int)
-for day in days:
-    month = day["date"][:7]  # YYYY-MM
-    monthly[month] += day["contributionCount"]
-
-# Get last 12 months
-sorted_months = sorted(monthly.keys())[-12:]
-month_commits = [monthly[m] for m in sorted_months]
-month_labels = [datetime.strptime(m, "%Y-%m").strftime("%b") for m in sorted_months]
-max_commits = max(month_commits) if max(month_commits) > 0 else 1
-
-# Current streak
 streak = 0
-today = datetime.utcnow().date()
+today = datetime.now().date()
 for day in reversed(days):
     d = datetime.strptime(day["date"], "%Y-%m-%d").date()
     if d > today:
@@ -66,251 +52,186 @@ for day in reversed(days):
     else:
         break
 
-# SVG dimensions
+monthly = defaultdict(list)
+for day in days:
+    monthly[day["date"][:7]].append(day)
+months = sorted(monthly.keys())[-7:]
+
 WIDTH = 900
-HEIGHT = 300
-GROUND_Y = 240
-SKY_H = GROUND_Y
-BUILDING_AREA_W = WIDTH - 40
-NUM_MONTHS = len(sorted_months)
-SLOT_W = BUILDING_AREA_W // NUM_MONTHS
+HEIGHT = 340
+GROUND_Y = 258
+ROAD_Y = GROUND_Y + 8
+ROAD_H = 22
+timestamp = datetime.now().strftime("%Y-%m-%d %H:%M UTC")
 
-rng = random.Random(42)
-
-def make_building(x, w, h, commits, month_label, seed):
-    r = random.Random(seed)
-    bx = x + 4
-    bw = w - 8
-    by = GROUND_Y - h
-    color_choices = [
-        ("#1a2a3a", "#2a3f52", "#0d1c2a"),
-        ("#1a1a2e", "#2a2a45", "#0d0d1e"),
-        ("#0d2618", "#1a3d26", "#081a10"),
-        ("#1e1a0d", "#332d14", "#141009"),
-        ("#1a0d1a", "#2e1a2e", "#100810"),
-    ]
-    dark, mid, shadow = r.choice(color_choices)
-
-    svg = ""
-
-    # Main building body
-    svg += f'<rect x="{bx}" y="{by}" width="{bw}" height="{h}" fill="{dark}"/>\n'
-    # Side shadow
-    svg += f'<rect x="{bx}" y="{by}" width="3" height="{h}" fill="{shadow}" opacity="0.6"/>\n'
-    # Top highlight
-    svg += f'<rect x="{bx}" y="{by}" width="{bw}" height="2" fill="{mid}"/>\n'
-
-    # Antenna on taller buildings
-    if h > 80 and r.random() > 0.4:
-        ant_x = bx + bw // 2
-        ant_h = r.randint(10, 25)
-        svg += f'<rect x="{ant_x - 1}" y="{by - ant_h}" width="2" height="{ant_h}" fill="{mid}"/>\n'
-        # blinking light on antenna
-        svg += f'''<circle cx="{ant_x}" cy="{by - ant_h}" r="2" fill="#ff4444" opacity="0.9">
-  <animate attributeName="opacity" values="0.9;0.1;0.9" dur="{r.uniform(0.8,2.0):.1f}s" repeatCount="indefinite"/>
-</circle>\n'''
-
-    # Water tower on some buildings
-    if h > 100 and r.random() > 0.6:
-        wt_x = bx + r.randint(4, bw - 12)
-        svg += f'<rect x="{wt_x}" y="{by - 14}" width="8" height="10" fill="{mid}"/>\n'
-        svg += f'<rect x="{wt_x - 1}" y="{by - 16}" width="10" height="3" fill="{mid}"/>\n'
-        svg += f'<rect x="{wt_x + 2}" y="{by - 4}" width="2" height="6" fill="{shadow}"/>\n'
-        svg += f'<rect x="{wt_x + 5}" y="{by - 4}" width="2" height="6" fill="{shadow}"/>\n'
-
-    # Windows
-    win_cols = max(1, (bw - 6) // 7)
-    win_rows = max(1, (h - 10) // 10)
-    for row in range(win_rows):
-        for col in range(win_cols):
-            wx = bx + 4 + col * 7
-            wy = by + 6 + row * 10
-            if wx + 4 > bx + bw - 2:
-                continue
-            lit = r.random()
-            if commits == 0:
-                win_color = "#0a0a12"
-                win_opacity = "0.3"
-                anim = ""
-            elif lit < 0.55:
-                # lit window
-                win_colors = ["#ffe566", "#ffd700", "#fffacd", "#ffeaa0", "#00ffcc", "#66ccff"]
-                wc = r.choice(win_colors)
-                win_color = wc
-                win_opacity = str(round(r.uniform(0.6, 0.95), 2))
-                if r.random() > 0.7:
-                    dur = round(r.uniform(2.0, 6.0), 1)
-                    anim = f'<animate attributeName="opacity" values="{win_opacity};{round(float(win_opacity)*0.2,2)};{win_opacity}" dur="{dur}s" repeatCount="indefinite"/>'
-                else:
-                    anim = ""
-            else:
-                win_color = "#050508"
-                win_opacity = "0.8"
-                anim = ""
-            svg += f'<rect x="{wx}" y="{wy}" width="4" height="5" fill="{win_color}" opacity="{win_opacity}">{anim}</rect>\n'
-
-    # Month label
-    label_y = GROUND_Y + 14
-    svg += f'<text x="{x + w//2}" y="{label_y}" font-family="\'Courier New\', monospace" font-size="8" fill="#445566" text-anchor="middle">{month_label}</text>\n'
-
-    return svg
-
-# Stars
-def make_stars(seed, count=120):
-    r = random.Random(seed)
-    svg = ""
-    for _ in range(count):
-        sx = r.uniform(0, WIDTH)
-        sy = r.uniform(0, SKY_H * 0.85)
-        size = r.uniform(0.5, 1.8)
-        op = round(r.uniform(0.3, 0.9), 2)
-        low = round(op * 0.2, 2)
-        dur = round(r.uniform(1.5, 5.0), 1)
-        svg += f'''<circle cx="{sx:.1f}" cy="{sy:.1f}" r="{size:.1f}" fill="white" opacity="{op}">
-  <animate attributeName="opacity" values="{op};{low};{op}" dur="{dur}s" repeatCount="indefinite"/>
-</circle>\n'''
-    return svg
-
-# Moon
-def make_moon():
-    mx, my = 820, 45
-    return f'''
-<circle cx="{mx}" cy="{my}" r="22" fill="#fffde0" opacity="0.92"/>
-<circle cx="{mx + 7}" cy="{my - 5}" r="18" fill="#0a0a18"/>
-<circle cx="{mx}" cy="{my}" r="22" fill="none" stroke="#fffde0" stroke-width="1" opacity="0.3"/>
-'''
-
-# Ground / road
-def make_ground():
-    svg = ""
-    # Ground
-    svg += f'<rect x="0" y="{GROUND_Y}" width="{WIDTH}" height="{HEIGHT - GROUND_Y}" fill="#070710"/>\n'
-    # Road
-    svg += f'<rect x="0" y="{GROUND_Y + 8}" width="{WIDTH}" height="18" fill="#0d0d18"/>\n'
-    # Road dashes
-    for i in range(0, WIDTH, 28):
-        svg += f'<rect x="{i}" y="{GROUND_Y + 16}" width="14" height="2" fill="#222233" opacity="0.8"/>\n'
-    # Sidewalk
-    svg += f'<rect x="0" y="{GROUND_Y}" width="{WIDTH}" height="8" fill="#0f0f1e"/>\n'
-    # Reflection on ground
-    svg += f'<rect x="0" y="{GROUND_Y}" width="{WIDTH}" height="4" fill="#1a1a3a" opacity="0.4"/>\n'
-    return svg
-
-# Moving cars
-def make_cars():
-    svg = ""
-    cars = [
-        {"color": "#ff4444", "speed": "8s", "y": GROUND_Y + 11, "w": 14, "h": 5},
-        {"color": "#ffff44", "speed": "13s", "y": GROUND_Y + 17, "w": 12, "h": 4},
-        {"color": "#4444ff", "speed": "18s", "y": GROUND_Y + 11, "w": 14, "h": 5},
-    ]
-    for i, car in enumerate(cars):
-        cx = car["w"]
-        cy = car["y"]
-        cw = car["w"]
-        ch = car["h"]
-        # headlights
-        svg += f'''<g opacity="0.9">
-  <rect x="0" y="{cy}" width="{cw}" height="{ch}" fill="{car["color"]}">
-    <animateTransform attributeName="transform" type="translate"
-      from="-20 0" to="{WIDTH + 20} 0"
-      dur="{car["speed"]}" repeatCount="indefinite" begin="{i * 2.5}s"/>
-  </rect>
-  <rect x="{cw - 3}" y="{cy + 1}" width="3" height="2" fill="#ffffaa" opacity="0.9">
-    <animateTransform attributeName="transform" type="translate"
-      from="-20 0" to="{WIDTH + 20} 0"
-      dur="{car["speed"]}" repeatCount="indefinite" begin="{i * 2.5}s"/>
-  </rect>
-</g>\n'''
-    return svg
-
-# Pixel person walking
-def make_walker():
-    px = 60
-    py = GROUND_Y - 8
-    svg = f'''<g>
-  <animateTransform attributeName="transform" type="translate"
-    from="-10 0" to="{WIDTH + 10} 0"
-    dur="20s" repeatCount="indefinite"/>
-  <!-- body -->
-  <rect x="{px}" y="{py}" width="4" height="6" fill="#00cc88"/>
-  <!-- head -->
-  <rect x="{px}" y="{py - 4}" width="4" height="4" fill="#ffcc99"/>
-  <!-- legs alternating -->
-  <rect x="{px}" y="{py + 6}" width="2" height="3" fill="#335577">
-    <animate attributeName="height" values="3;1;3" dur="0.4s" repeatCount="indefinite"/>
-  </rect>
-  <rect x="{px + 2}" y="{py + 6}" width="2" height="3" fill="#335577">
-    <animate attributeName="height" values="1;3;1" dur="0.4s" repeatCount="indefinite"/>
-  </rect>
-</g>'''
-    return svg
-
-timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
-
-svg = f'''<svg width="{WIDTH}" height="{HEIGHT}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH} {HEIGHT}">
-<!-- Pixel City Skyline — {timestamp} -->
-<defs>
-  <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" style="stop-color:#020208;stop-opacity:1"/>
-    <stop offset="60%" style="stop-color:#050514;stop-opacity:1"/>
-    <stop offset="100%" style="stop-color:#0a0a20;stop-opacity:1"/>
+defs = f'''<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" style="stop-color:#0f0225"/>
+    <stop offset="30%" style="stop-color:#3d0860"/>
+    <stop offset="58%" style="stop-color:#7a1060"/>
+    <stop offset="78%" style="stop-color:#c43a1a"/>
+    <stop offset="100%" style="stop-color:#e8720a;stop-opacity:0.7"/>
   </linearGradient>
-  <filter id="cityGlow" x="-5%" y="-5%" width="110%" height="110%">
-    <feGaussianBlur stdDeviation="1.5" result="blur"/>
+  <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" style="stop-color:#fff0a0;stop-opacity:1"/>
+    <stop offset="35%" style="stop-color:#ff9900;stop-opacity:0.7"/>
+    <stop offset="100%" style="stop-color:#660000;stop-opacity:0"/>
+  </radialGradient>
+  <radialGradient id="sunCore" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" style="stop-color:#ffffff"/>
+    <stop offset="45%" style="stop-color:#ffe566"/>
+    <stop offset="100%" style="stop-color:#ff8800"/>
+  </radialGradient>
+  <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" style="stop-color:#080118"/>
+    <stop offset="100%" style="stop-color:#03000c"/>
+  </linearGradient>
+  <radialGradient id="lampGlow" cx="50%" cy="0%" r="100%">
+    <stop offset="0%" style="stop-color:#ffee88;stop-opacity:0.5"/>
+    <stop offset="100%" style="stop-color:#ff8800;stop-opacity:0"/>
+  </radialGradient>
+  <filter id="winglow" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="1.3" result="blur"/>
     <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
   </filter>
-  <!-- Scanlines -->
+  <filter id="lampfilter" x="-100%" y="-100%" width="300%" height="300%">
+    <feGaussianBlur stdDeviation="3" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
   <pattern id="scanlines" x="0" y="0" width="1" height="2" patternUnits="userSpaceOnUse">
-    <rect width="1" height="1" fill="rgba(0,0,0,0.06)"/>
+    <rect width="1" height="1" fill="rgba(0,0,0,0.04)"/>
   </pattern>
 </defs>
+<rect width="{WIDTH}" height="{HEIGHT}" fill="url(#sky)"/>'''
 
-<!-- Sky -->
-<rect width="{WIDTH}" height="{HEIGHT}" fill="url(#skyGrad)"/>
+SUN_X, SUN_Y = 450, 135
+sun = f'''<circle cx="{SUN_X}" cy="{SUN_Y}" r="120" fill="url(#sunGlow)" opacity="0.4"/>
+<circle cx="{SUN_X}" cy="{SUN_Y}" r="40" fill="url(#sunCore)" opacity="0.97"/>
+<rect x="{SUN_X-40}" y="{SUN_Y-2}" width="80" height="5" fill="#0f0225" opacity="0.2"/>
+<rect x="{SUN_X-40}" y="{SUN_Y+8}" width="80" height="3" fill="#0f0225" opacity="0.15"/>
+<rect x="{SUN_X-40}" y="{SUN_Y-10}" width="80" height="3" fill="#0f0225" opacity="0.15"/>'''
 
-<!-- Stars -->
-{make_stars(99)}
+bg = ""
+rng0 = random.Random(55)
+for bx in range(0, WIDTH, 14):
+    bh = rng0.randint(15, 50)
+    bg += f'<rect x="{bx}" y="{GROUND_Y-bh}" width="12" height="{bh}" fill="#1e0640" opacity="0.25"/>\n'
 
-<!-- Moon -->
-{make_moon()}
+stars = ""
+rng1 = random.Random(77)
+for _ in range(55):
+    sx = rng1.uniform(0, WIDTH); sy = rng1.uniform(0, GROUND_Y*0.4)
+    sr = rng1.uniform(0.3, 1.2); op = round(rng1.uniform(0.1, 0.5), 2)
+    lo = round(op*0.1, 2); dur = round(rng1.uniform(2, 5), 1)
+    stars += f'<circle cx="{sx:.1f}" cy="{sy:.1f}" r="{sr:.1f}" fill="white" opacity="{op}"><animate attributeName="opacity" values="{op};{lo};{op}" dur="{dur}s" repeatCount="indefinite"/></circle>\n'
 
-<!-- City glow on horizon -->
-<ellipse cx="{WIDTH//2}" cy="{GROUND_Y}" rx="400" ry="30" fill="#001a33" opacity="0.5"/>
+COLS = 5; ROWS = 6
+WIN_W = 10; WIN_H = 8
+WIN_GAP_X = 5; WIN_GAP_Y = 5
+PAD_X = 10; PAD_BOT = 10
+BW = PAD_X*2 + COLS*WIN_W + (COLS-1)*WIN_GAP_X
+NUM = len(months)
+TOTAL_GAP = WIDTH - NUM*BW
+GAP = TOTAL_GAP // (NUM+1)
 
-'''
+max_total = max(sum(d["contributionCount"] for d in monthly[m]) for m in months)
 
-# Buildings
-for i, (label, commits) in enumerate(zip(month_labels, month_commits)):
-    slot_x = 20 + i * SLOT_W
-    # Height proportional to commits, min 20px, max 180px
-    if commits == 0:
-        bh = 15
-    else:
-        bh = int(20 + (commits / max_commits) * 160)
-    # Vary building width slightly
-    bw = SLOT_W
-    svg += make_building(slot_x, bw, bh, commits, label, seed=i * 137 + 42)
+buildings = ""
+lamp_positions = []
 
-# Ground, road, cars, walker
-svg += make_ground()
-svg += make_cars()
-svg += make_walker()
+for i, m in enumerate(months):
+    month_days = monthly[m]
+    month_total = sum(d["contributionCount"] for d in month_days)
+    norm = month_total / max_total if max_total > 0 else 0.1
+    base_h = PAD_BOT + ROWS*WIN_H + (ROWS-1)*WIN_GAP_Y + 16
+    extra_h = int(math.log1p(norm * 8) / math.log1p(8) * 100)
+    bh = base_h + extra_h
+    bx = GAP + i*(BW + GAP)
+    by = GROUND_Y - bh
+    cx = bx + BW//2
 
-# Stats overlay bottom right
-svg += f'''
-<!-- Stats -->
-<text x="{WIDTH - 12}" y="{GROUND_Y - 10}" font-family="\'Courier New\', monospace" font-size="8" fill="#334455" text-anchor="end" opacity="0.8">{total} commits · {streak}d streak · {timestamp}</text>
+    buildings += f'<rect x="{bx}" y="{by}" width="{BW}" height="{bh}" fill="#08011a"/>\n'
+    buildings += f'<rect x="{bx}" y="{by}" width="3" height="{bh}" fill="#180438" opacity="0.6"/>\n'
+    buildings += f'<rect x="{bx+BW-3}" y="{by}" width="3" height="{bh}" fill="#030008" opacity="0.8"/>\n'
+    buildings += f'<rect x="{bx-2}" y="{by}" width="{BW+4}" height="4" fill="#1a0440"/>\n'
+    buildings += f'<rect x="{bx+8}" y="{by-6}" width="12" height="6" fill="#110330"/>\n'
+    buildings += f'<rect x="{bx+BW-20}" y="{by-5}" width="10" height="5" fill="#110330"/>\n'
+    buildings += f'<rect x="{cx-1}" y="{by-16}" width="2" height="12" fill="#1a0440"/>\n'
+    buildings += f'<circle cx="{cx}" cy="{by-16}" r="2" fill="#ff3333" opacity="0.9"><animate attributeName="opacity" values="0.9;0.1;0.9" dur="1.1s" repeatCount="indefinite"/></circle>\n'
 
-<!-- Scanlines -->
-<rect width="{WIDTH}" height="{HEIGHT}" fill="url(#scanlines)" opacity="0.5"/>
+    win_start_y = by + bh - PAD_BOT - ROWS*WIN_H - (ROWS-1)*WIN_GAP_Y
+    rng = random.Random(hash(m))
+    for idx, day in enumerate(month_days[:30]):
+        col = idx % COLS; row = idx // COLS
+        wx = bx + PAD_X + col*(WIN_W + WIN_GAP_X)
+        wy = win_start_y + row*(WIN_H + WIN_GAP_Y)
+        count = day["contributionCount"]
+        if count == 0:
+            wc, op, anim = "#06010f", "0.7", ""
+        elif count >= 6:
+            wc = "#ffe566"; op = str(round(rng.uniform(0.85,1.0),2))
+            dur = round(rng.uniform(1.0,2.5),1); lo = round(float(op)*0.3,2)
+            anim = f'<animate attributeName="opacity" values="{op};{lo};{op}" dur="{dur}s" repeatCount="indefinite"/>'
+        elif count >= 3:
+            wc = "#ff9944"; op = str(round(rng.uniform(0.65,0.88),2))
+            dur = round(rng.uniform(2.0,4.0),1); lo = round(float(op)*0.2,2)
+            anim = f'<animate attributeName="opacity" values="{op};{lo};{op}" dur="{dur}s" repeatCount="indefinite"/>'
+        else:
+            wc = "#cc44aa"; op = str(round(rng.uniform(0.4,0.65),2)); anim = ""
+        buildings += f'<rect x="{wx}" y="{wy}" width="{WIN_W}" height="{WIN_H}" fill="{wc}" opacity="{op}" filter="url(#winglow)">{anim}</rect>\n'
 
-<!-- Pixel border -->
-<rect x="0" y="0" width="{WIDTH}" height="{HEIGHT}" fill="none" stroke="#0d1a2a" stroke-width="3"/>
+    label = datetime.strptime(m, "%Y-%m").strftime("%b")
+    buildings += f'<text x="{cx}" y="{GROUND_Y+30}" font-family="\'Courier New\', monospace" font-size="8" fill="#cc88ff" opacity="0.8" text-anchor="middle">{label}</text>\n'
+    lamp_positions.append(bx + BW + GAP//2)
+
+ground = f'<rect x="0" y="{GROUND_Y}" width="{WIDTH}" height="{HEIGHT-GROUND_Y}" fill="url(#groundGrad)"/>\n'
+ground += f'<rect x="0" y="{GROUND_Y}" width="{WIDTH}" height="8" fill="#0d0228"/>\n'
+ground += f'<rect x="0" y="{ROAD_Y}" width="{WIDTH}" height="{ROAD_H}" fill="#0a0118"/>\n'
+ground += f'<rect x="0" y="{ROAD_Y}" width="{WIDTH}" height="2" fill="#1a0440" opacity="0.5"/>\n'
+ground += f'<rect x="0" y="{ROAD_Y+ROAD_H}" width="{WIDTH}" height="2" fill="#1a0440" opacity="0.4"/>\n'
+for dx in range(0, WIDTH, 30):
+    ground += f'<rect x="{dx}" y="{ROAD_Y+ROAD_H//2-1}" width="18" height="2" fill="#1a0335" opacity="0.6"/>\n'
+ground += f'<ellipse cx="{WIDTH//2}" cy="{GROUND_Y+4}" rx="440" ry="8" fill="#ff6600" opacity="0.04"/>\n'
+
+lamps = ""
+for lx in lamp_positions[:-1]:
+    ly = GROUND_Y
+    lamps += f'<rect x="{lx-1}" y="{ly-32}" width="2" height="32" fill="#1a0440"/>\n'
+    lamps += f'<rect x="{lx-1}" y="{ly-32}" width="8" height="2" fill="#1a0440"/>\n'
+    lamps += f'<rect x="{lx+4}" y="{ly-35}" width="8" height="5" fill="#2a0855"/>\n'
+    lamps += f'<ellipse cx="{lx+8}" cy="{ly-30}" rx="14" ry="18" fill="url(#lampGlow)" filter="url(#lampfilter)" opacity="0.7"/>\n'
+    lamps += f'<circle cx="{lx+8}" cy="{ly-33}" r="2" fill="#ffee88" opacity="0.95"><animate attributeName="opacity" values="0.95;0.6;0.95" dur="3s" repeatCount="indefinite"/></circle>\n'
+
+cars = ""
+car_data = [
+    {"color": "#cc2244", "headlight": "#ffaaaa", "y": ROAD_Y+4,  "w": 20, "h": 8,  "speed": "9s",  "begin": "0s"},
+    {"color": "#2244cc", "headlight": "#aaaaff", "y": ROAD_Y+12, "w": 22, "h": 8,  "speed": "14s", "begin": "3s"},
+    {"color": "#22aa55", "headlight": "#aaffcc", "y": ROAD_Y+4,  "w": 18, "h": 7,  "speed": "7s",  "begin": "5s"},
+    {"color": "#aa6600", "headlight": "#ffddaa", "y": ROAD_Y+12, "w": 20, "h": 8,  "speed": "11s", "begin": "1.5s"},
+]
+for c in car_data:
+    cw, ch, cy = c["w"], c["h"], c["y"]
+    cars += f'''<g>
+  <rect x="0" y="{cy}" width="{cw}" height="{ch}" fill="{c["color"]}" rx="2">
+    <animateTransform attributeName="transform" type="translate" from="-30 0" to="{WIDTH+30} 0" dur="{c["speed"]}" begin="{c["begin"]}" repeatCount="indefinite"/>
+  </rect>
+  <rect x="{cw-4}" y="{cy+2}" width="4" height="3" fill="{c["headlight"]}" opacity="0.9">
+    <animateTransform attributeName="transform" type="translate" from="-30 0" to="{WIDTH+30} 0" dur="{c["speed"]}" begin="{c["begin"]}" repeatCount="indefinite"/>
+  </rect>
+  <rect x="0" y="{cy+2}" width="3" height="3" fill="#ff3300" opacity="0.7">
+    <animateTransform attributeName="transform" type="translate" from="-30 0" to="{WIDTH+30} 0" dur="{c["speed"]}" begin="{c["begin"]}" repeatCount="indefinite"/>
+  </rect>
+</g>\n'''
+
+svg = f'''<svg width="{WIDTH}" height="{HEIGHT}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH} {HEIGHT}">
+{defs}{sun}{stars}{bg}{buildings}{ground}{lamps}{cars}
+<text x="16" y="{HEIGHT-8}" font-family="'Courier New', monospace" font-size="8" fill="#9966cc" opacity="0.65">{total} commits · {streak}d streak · {timestamp}</text>
+<rect width="{WIDTH}" height="{HEIGHT}" fill="url(#scanlines)"/>
+<rect x="0" y="0" width="{WIDTH}" height="{HEIGHT}" fill="none" stroke="#1a0535" stroke-width="3"/>
 </svg>'''
 
 os.makedirs("dist", exist_ok=True)
 with open("dist/city.svg", "w") as f:
     f.write(svg)
 
-print(f"Done! {NUM_MONTHS} buildings, {total} total commits, {streak} day streak.")
+print(f"Done! {len(months)} buildings, {total} commits, {streak}d streak.")
