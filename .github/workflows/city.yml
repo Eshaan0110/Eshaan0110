@@ -1,4 +1,4 @@
-name: Generate Pixel City
+name: Generate Sunset City
 
 on:
   schedule:
@@ -41,7 +41,7 @@ jobs:
           cp /tmp/city.svg dist/city.svg
 
           git add dist/city.svg
-          git commit -m "Update pixel city [skip ci]" || echo "No changes to commit"
+          git commit -m "Update sunset city [skip ci]" || echo "No changes to commit"
           git push origin output --force
 
       - name: Purge jsdelivr cache
