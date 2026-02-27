@@ -52,7 +52,7 @@ Real-time AI deployment on embedded hardware
 <br>
 <h2 align="center">Contribution City</h2>
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/Eshaan0110/Eshaan0110@output/dist/city.svg" width="100%"/>
+  <img src="https://cdn.jsdelivr.net/gh/Eshaan0110/Eshaan0110@output/dist/sunset.svg" width="100%"/>
 </p>
 <p align="center">
   <sub>Each building is a month · windows show daily commits · yellow = active · updates daily</sub>
