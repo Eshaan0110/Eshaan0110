@@ -231,7 +231,7 @@ svg = f'''<svg width="{WIDTH}" height="{HEIGHT}" xmlns="http://www.w3.org/2000/s
 </svg>'''
 
 os.makedirs("dist", exist_ok=True)
-with open("dist/city.svg", "w") as f:
+with open("dist/sunset.svg", "w") as f:
     f.write(svg)
 
 print(f"Done! {len(months)} buildings, {total} commits, {streak}d streak.")
