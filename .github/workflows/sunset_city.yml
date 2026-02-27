@@ -1,0 +1,50 @@
+name: Generate Sunset City
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run city script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/sunset_city.py
+
+      - name: Commit and push to output branch
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+
+          cp dist/sunset.svg /tmp/sunset.svg
+
+          git fetch origin
+          git checkout -B output origin/output 2>/dev/null || git checkout -B output
+
+          mkdir -p dist
+          cp /tmp/sunset.svg dist/sunset.svg
+
+          git add dist/sunset.svg
+          git commit -m "Update sunset city [skip ci]" || echo "No changes to commit"
+          git push origin output --force
+
+      - name: Purge jsdelivr cache
+        run: |
+          curl -s "https://purge.jsdelivr.net/gh/Eshaan0110/Eshaan0110@output/dist/sunset.svg"
+          echo "Cache purged"
