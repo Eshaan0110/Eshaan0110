@@ -47,7 +47,7 @@ Real-time AI deployment on embedded hardware
 <br>
 <h2 align="center">GitHub Activity</h2>
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Eshaan0110&bg_color=0D1117&color=9CA3AF&line=3B82F6&point=FFFFFF&hide_border=true&area=true" />
+  <img src="https://github-readme-activity-graph.cyclic.app/graph?username=Eshaan0110&theme=github-dark&hide_border=true&area=true" />
 </p>
 <br>
 <h2 align="center">Contribution City</h2>
