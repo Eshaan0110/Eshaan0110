@@ -45,9 +45,9 @@ Real-time AI deployment on embedded hardware
 <img src="https://img.shields.io/badge/Raspberry_Pi-C51A4A?style=for-the-badge&logo=raspberry-pi&logoColor=white"/>
 </p>
 <br>
-<h2 align="center">GitHub Activity</h2>
+<h2 align="center">GitHub Overview</h2>
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Eshaan0110&bg_color=0D1117&color=9CA3AF&line=3B82F6&point=FFFFFF&hide_border=true&area=true" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Eshaan0110&theme=github_dark" />
 </p>
 <br>
 <h2 align="center">Contribution City</h2>
