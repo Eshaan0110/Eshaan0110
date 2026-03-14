@@ -58,6 +58,9 @@ Real-time AI deployment on embedded hardware
   <sub>Each building is a month · windows show daily commits · yellow = active · updates daily</sub>
 </p>
 <br>
+<p align="center">
+  <img src="https://streak-stats.demolab.com?user=Eshaan0110&theme=dark&hide_border=true&background=0D1117&stroke=3B82F6&ring=9CA3AF&fire=3B82F6&currStreakLabel=9CA3AF" />
+</p>
 <h2 align="center">Connect</h2>
 <p align="center">
 <a href="mailto:eshaan.adyanthaya@gmail.com">
