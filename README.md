@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">Eshaan Adyanthaya</h1>
 <p align="center">
-AI & Robotics Engineer <br>
+Software Engineering | Applied ML | AI Engineering | Computer Vision & Robotics <br>
 Integrated M.Tech @ VIT Chennai
 </p>
 <p align="center">
@@ -12,9 +12,10 @@ Designing intelligent systems that move from geometry to real-world deployment.
 <br>
 <h2 align="center">Currently Building</h2>
 <p align="center">
-Autonomous underwater perception systems <br>
-Gesture-controlled robotic manipulation <br>
-Real-time AI deployment on embedded hardware
+Backend services with FastAPI <br>
+RAG pipelines with embeddings, vector databases & hybrid search <br>
+Applied ML & time-series forecasting <br>
+Full-stack apps & automation
 </p>
 <br>
 <h2 align="center">Systems I Work With</h2>
@@ -33,9 +34,23 @@ Real-time AI deployment on embedded hardware
 <img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white"/>
 <img src="https://img.shields.io/badge/MediaPipe-0F9D58?style=for-the-badge"/>
 <img src="https://img.shields.io/badge/YOLO-111F68?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white"/>
+<img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white"/>
+<img src="https://img.shields.io/badge/Prophet-0467DF?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Statsmodels-4051B5?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Qdrant-DC244C?style=for-the-badge&logo=qdrant&logoColor=white"/>
+<img src="https://img.shields.io/badge/FastEmbed-6E40C9?style=for-the-badge"/>
 <img src="https://img.shields.io/badge/ROS-22314E?style=for-the-badge&logo=ros&logoColor=white"/>
 <img src="https://img.shields.io/badge/Roboflow-6706CE?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white"/>
+<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"/>
+<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
+<img src="https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white"/>
 <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/>
+<img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white"/>
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
+<img src="https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/CUDA-76B900?style=for-the-badge&logo=nvidia&logoColor=white"/>
 <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white"/>
 <img src="https://img.shields.io/badge/Google_Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=black"/>
 <img src="https://img.shields.io/badge/VS_Code-0078D4?style=for-the-badge&logo=visual-studio-code&logoColor=white"/>
